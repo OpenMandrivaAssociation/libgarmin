@@ -1,0 +1,61 @@
+diff -Naur libgarmin-20090212/configure.ac libgarmin-20090212.oden/configure.ac
+--- libgarmin-20090212/configure.ac	2008-11-08 19:38:20.000000000 +0100
++++ libgarmin-20090212.oden/configure.ac	2010-08-02 21:05:54.541790983 +0200
+@@ -12,7 +12,7 @@
+         CFLAGS="$CFLAGS -Wall -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wreturn-type"
+ fi
+ 
+-AC_PROG_RANLIB
++AC_PROG_LIBTOOL
+ # Checks for libraries.
+ # FIXME: Replace `main' with a function in `-lgarmin':
+ #AC_CHECK_LIB([garmin], [main])
+diff -Naur libgarmin-20090212/src/Makefile.am libgarmin-20090212.oden/src/Makefile.am
+--- libgarmin-20090212/src/Makefile.am	2008-12-02 14:23:21.000000000 +0100
++++ libgarmin-20090212.oden/src/Makefile.am	2010-08-02 21:01:14.151172072 +0200
+@@ -2,9 +2,9 @@
+ 
+ AM_CPPFLAGS += -DDATAPREFIX=\"@datarootdir@\" 
+ 
+-lib_LIBRARIES = libgarmin.a
++lib_LTLIBRARIES = libgarmin.la
+ 
+-libgarmin_a_SOURCES = GarminTypedef.h  garmin_fat.c  garmin_rgn.h \
++libgarmin_la_SOURCES = GarminTypedef.h  garmin_fat.c  garmin_rgn.h \
+ 		bsp.c  garmin_fat.h  garmin_subdiv.c libgarmin_priv.h \
+ 		bsp.h garmin_lbl.c  garmin_subdiv.h \
+ 		garmin_lbl.h  garmin_typ.c list.c \
+@@ -18,12 +18,15 @@
+ 		garmin_mdr.c garmin_mdr.h	\
+ 		garmin_route.c align.h extras.h
+ 
+-nodist_libgarmin_a_SOURCES=
++nodist_libgarmin_la_SOURCES=
+ if HAVEEXTRAS
+-nodist_libgarmin_a_SOURCES+=extras.c
++nodist_libgarmin_la_SOURCES+=extras.c
+ endif
+ 
++libgarmin_la_LDFLAGS = -version-info 0:0:0
++
+ include_HEADERS = libgarmin.h
+ 
+ clean-local:
+ 	rm -rf *~ *.bak core
++
+diff -Naur libgarmin-20090212/utils/Makefile.am libgarmin-20090212.oden/utils/Makefile.am
+--- libgarmin-20090212/utils/Makefile.am	2008-12-02 14:23:21.000000000 +0100
++++ libgarmin-20090212.oden/utils/Makefile.am	2010-08-02 20:57:36.391807317 +0200
+@@ -1,9 +1,9 @@
+ AM_CPPFLAGS=-I$(top_srcdir)/src -Wall
+ bin_PROGRAMS = garxtract garxor
+ noinst_PROGRAMS = gartest bsptest garroute
+-gartest_LDADD = ../src/libgarmin.a
+-garxtract_LDADD = ../src/libgarmin.a
+-garroute_LDADD = ../src/libgarmin.a
++gartest_LDADD = ../src/libgarmin.la
++garxtract_LDADD = ../src/libgarmin.la
++garroute_LDADD = ../src/libgarmin.la
+ 
+ clean-local:
+ 	rm -rf *~ *.bak core
