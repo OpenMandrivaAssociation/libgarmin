@@ -46,10 +46,11 @@ applications that use %{name}.
 
 %prep
 %setup -qn %{name}-%{alphatag}
-%patch0 -p1
+%apply_patches
 
 %build
-libtoolize --copy --force; aclocal; autoconf; automake --add-missing --copy
+#libtoolize --copy --force; aclocal; autoconf; automake --add-missing --copy
+autoreconf -fi
 %configure2_5x \
 	--disable-static
 
