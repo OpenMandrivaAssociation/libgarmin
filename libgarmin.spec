@@ -46,7 +46,7 @@ applications that use %{name}.
 
 %prep
 %setup -qn %{name}-%{alphatag}
-%apply_patches
+%autopatch -p1
 
 %build
 #libtoolize --copy --force; aclocal; autoconf; automake --add-missing --copy
