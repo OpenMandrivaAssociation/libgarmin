@@ -11,7 +11,7 @@ Version:	0
 Release:	0.1.%{alphatag}%{vcs}.1
 Group:		System/Libraries
 License:	GPLv2
-URL:		http://libgarmin.sourceforge.net/
+URL:		https://libgarmin.sourceforge.net/
 Source0:	libgarmin-%{alphatag}%{vcs}.tar.bz2
 Source1:	libgarmin-checkout.sh
 Patch0:		libgarmin-20090212-shared.diff
