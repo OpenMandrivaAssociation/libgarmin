@@ -15,6 +15,11 @@ URL:		https://libgarmin.sourceforge.net/
 Source0:	libgarmin-%{alphatag}%{vcs}.tar.bz2
 Source1:	libgarmin-checkout.sh
 Patch0:		libgarmin-20090212-shared.diff
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool
 
 %description
